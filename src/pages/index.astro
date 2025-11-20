@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import BlogList from "../components/BlogList.astro";
+import Layout from "../layouts/Layout.astro";
+import { byDate } from "../utils/sort-by-date";
+
+const allBlogs = await getCollection("blogs");
+const blogs = allBlogs.filter(
+	(blog) => import.meta.env.DEV || !blog.data.draft,
+);
+
+blogs.sort(byDate);
+---
+
+<Layout
+	title="Tan Nguyen"
+	description="Personal blog by Tan Nguyen - Web developer specializing in Angular and TypeScript"
+>
+	<BlogList blogs={blogs} />
+</Layout>

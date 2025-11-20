@@ -1,0 +1,17 @@
+---
+import SocialIcon from "./SocialIcon.astro";
+
+const socials = [
+	{ id: "Github", link: "https://github.com/tannn86" },
+	{ id: "LinkedIn", link: "https://www.linkedin.com/in/tanataan/" },
+	{ id: "Facebook", link: "https://www.facebook.com/tanataan86" },
+] as const;
+---
+
+<div class="mb-4 grid w-full grid-cols-6 gap-2 lg:w-1/2 lg:grid-cols-3">
+	{
+		socials.map((social) => (
+			<SocialIcon socialId={social.id} link={social.link} />
+		))
+	}
+</div>
