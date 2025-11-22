@@ -26,10 +26,9 @@ const {
 	tags = [],
 } = Astro.props;
 
-const siteUrl = Astro.url.origin;
 const fullImageUrl = ogImage.startsWith("http")
 	? ogImage
-	: `${siteUrl}${ogImage}`;
+	: new URL(ogImage, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -38,7 +37,16 @@ const fullImageUrl = ogImage.startsWith("http")
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content="Personal blog by Tan Nguyen" />
-		<link rel="icon" type="image/x-icon" href="/assets/icons/favicon.png" />
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href={new URL("assets/icons/favicon.png", Astro.site).toString()}
+		/>
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href={new URL("favicon.ico", Astro.site).toString()}
+		/>
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Canonical URL -->
